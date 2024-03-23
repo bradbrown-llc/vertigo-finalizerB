@@ -1,6 +1,6 @@
 import { kvv } from './lib/kvv.ts'
 import { ejra } from './lib/ejra.ts'
-import { Burn } from '../vertigo/lib/Burn.ts'
+import { Burn } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/vertigo@0.0.6/lib/Burn.ts'
 import { processId } from './lib/processId.ts'
 import { err } from './lib/err.ts'
 import { out } from './lib/out.ts'
@@ -25,7 +25,6 @@ while (true) {
     const burn = await Burn.next('finalizable', kvv, ejra, { err, out })
     if (burn instanceof Error || burn === null) continue
     const claimed = await burn.claim(processId)
-    console.log({ claimed })
     if (claimed instanceof Error || claimed === false) continue
     await handleBurn(burn)
     
